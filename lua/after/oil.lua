@@ -1,0 +1,5 @@
+vim.keymap.set("n", "<leader>ef", function() 
+	local oil = require("oil")
+	local dir = vim.fn.expand("%:p:h")
+	oil.open(dir, nil, nil)
+end)
