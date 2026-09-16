@@ -22,10 +22,10 @@ vim.keymap.set("n", "<leader>gac", function()
 
 			if value == 'y' or value == 'yes' then
 				vim.cmd([[silent Git push]])
-				Snacks.notiify.info("Pushed to remote.")
+				Snacks.notify.info("Pushed to remote.")
 			end
 
-			Snacks.notiify.erro("Invalid response. No action taken.")
+			Snacks.notify.error("Invalid response. No action taken.")
 
 			return
 		end)
