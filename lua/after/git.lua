@@ -1,5 +1,7 @@
 local dfv = require("diffview")
 
+
+
 vim.keymap.set("n", "<leader>gac", function()
 	vim.system({ "git", "add", "-A" }, {}, function(addResult)
 		if addResult.code ~= 0 then
@@ -44,8 +46,19 @@ vim.keymap.set("n", "<leader>gac", function()
 
 					Snacks.notify.error("Invalid input, no action taken.")
 				end)
-
 			end)
 		end)
 	end)
+end)
+
+-- Probably a better way to do this but whatever
+diffviewOpen = false
+vim.keymap.set("n", "<leader>dv", function()
+	if diffViewOpen == false then
+		vim.cmd([[DiffviewOpen --imply-local]])
+		diffViewOpen = true
+	else 
+		vim.cmd([[DiffviewClose ]])
+		diffViewOpen = false 
+	end
 end)
