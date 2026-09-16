@@ -32,8 +32,10 @@ vim.keymap.set("n", "<leader>gac", function()
 								Snacks.notify.error(pushResult.stderr)
 								return
 							end
+							Snacks.notify.info("Pushed to remote.")
 							return	
 						end)
+						return
 					end
 					
 					if msg == 'n' or msg == 'no' then
