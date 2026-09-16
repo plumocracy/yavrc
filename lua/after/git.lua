@@ -1,34 +1,27 @@
 local dfv = require("diffview")
 
-
 vim.keymap.set("n", "<leader>gac", function()
-	Snacks.input({
-		prompt = "Commit msg:",
-	}, function(value)
-		if value == nil then
+	vim.system({ "git", "add", "-A" }, {}, function(addResult)
+		if addResult.code ~= 0 then
 			return
-		end		
+		end
 
-		vim.cmd([[Git add -A]])
-		vim.cmd("silent Git commit -m " .. vim.fn.shellescape(value))	
+		vim.schedule(function()
+			Snacks.input({
+				prompt = "Commit msg: ",
+			}, function(msg)
+				if not msg or msg == "" then
+					return
+				end
 
-
-		Snacks.input({
-			prompt = "Push? y/n"
-		}, function(value) 
-			if value == 'n' or value == 'no' then
-				return
-			end
-
-			if value == 'y' or value == 'yes' then
-				vim.cmd([[silent Git push]])
-				Snacks.notify.info("Pushed to remote.")
-			end
-
-			Snacks.notify.error("Invalid response. No action taken.")
-
-			return
+				vim.system({ "git", "commit", "-m", msg }, {}, function(commitResult)
+					if commitResult.code ~= 0 then
+						vim.schedule(function()
+							vim.notify(commitResult.stderr, vim.log.levels.ERROR)
+						end)
+					end
+				end)
+			end)
 		end)
 	end)
-
 end)
