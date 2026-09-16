@@ -1,1 +1,7 @@
-return { { "folke/which-key.nvim", lazy = true } } 
+return {
+	{
+		"folke/which-key.nvim",
+		event = "VeryLazy",
+		opts = {},
+	},
+}

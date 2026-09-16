@@ -18,6 +18,18 @@ return {
 			{ "mason-org/mason.nvim", opts = {} },
 			"neovim/nvim-lspconfig",
 		},
+	},
+	{
+		"j-hui/fidget.nvim"
+	},
+	{
+		"https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim"
+	},
+	{
+		"https://github.com/nvimtools/none-ls.nvim",
+		dependencies = {
+        	'nvim-lua/plenary.nvim',
+		}
 	}
 }
 
