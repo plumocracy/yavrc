@@ -30,7 +30,9 @@ vim.keymap.set("n", "<leader>gac", function()
 						vim.system({ "git", "push" }, {}, function(pushResult) 
 							if pushResult.code ~= 0 then
 								Snacks.notify.error(pushResult.stderr)
+								return
 							end
+							return	
 						end)
 					end
 					
